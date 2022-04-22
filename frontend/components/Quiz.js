@@ -1,24 +1,34 @@
-import React from 'react';
+import React, { useEffect} from 'react';
 import { connect } from 'react-redux';
-import { selectAnswer, setMessage, setQuiz } from '../state/action-creators';
+import { selectAnswer, setMessage, setQuiz, fetchQuiz, postAnswer } from '../state/action-creators';
 
 // export default function Quiz(props) {
 const Quiz = (props) => {
 
-  console.log(props);
+  // console.log(props);
 
-  const selectAnswer = props.selectAnswer;
-  const setMessage = props.setMessage;
-  const setQuiz = props.setQuiz
+  const {
+    selectAnswer,
+    setMessage,
+    setQuiz,
+    fetchQuiz,
+    quiz,
+    selectedAnswer,
+    infoMessage,
+  } = props
 
-  console.log(selectAnswer);
-  console.log(setMessage);
-  console.log(setQuiz);
+  // console.log(selectAnswer);
+  // console.log(setMessage);
+  // console.log(setQuiz);
 
-  // console.log(quizStuff);
-  // console.log(selectedAnswerStuff);
-  // console.log(infoMessageStuff);
+  console.log(quiz);
+  // console.log(selectedAnswer);
+  // console.log(infoMessage);
   
+  useEffect(() => {
+    fetchQuiz()
+  }, [])
+
 
   return (
     <div id="wrapper">
@@ -60,4 +70,4 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps, {selectAnswer, setMessage, setQuiz})(Quiz)
+export default connect(mapStateToProps, {selectAnswer, setMessage, setQuiz, fetchQuiz, postAnswer})(Quiz)

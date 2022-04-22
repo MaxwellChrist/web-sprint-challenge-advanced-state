@@ -48,6 +48,8 @@ function wheel(state = initialWheelState, action) {
 const initialQuizState = null
 function quiz(state = initialQuizState, action) {
   switch(action.type) {
+    case SET_QUIZ_INTO_STATE:
+      return action.payload
     default:
       return state
   }
@@ -61,7 +63,9 @@ function selectedAnswer(state = initialSelectedAnswerState, action) {
   }
 }
 
-const initialMessageState = ''
+const initialLoadingState = false
+// const initialMessageState = ''
+const initialMessageState = 'Loading next quiz...'
 function infoMessage(state = initialMessageState, action) {
   switch(action.type) {
     default:
