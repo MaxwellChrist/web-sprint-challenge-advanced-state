@@ -46,10 +46,10 @@ export function fetchQuiz() {
     // On successful GET:
     // - Dispatch an action to send the obtained quiz to its state
 
-    dispatch(setMessage)
+    dispatch(setQuiz(null))
     axios.get("http://localhost:9000/api/quiz/next") 
       .then((res) => {
-        // console.log(res.data)
+        console.log(res.data)
         dispatch(setQuiz(res.data))
       })
       .catch((err) => {

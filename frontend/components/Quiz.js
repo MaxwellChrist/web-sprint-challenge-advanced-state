@@ -5,8 +5,6 @@ import { selectAnswer, setMessage, setQuiz, fetchQuiz, postAnswer } from '../sta
 // export default function Quiz(props) {
 const Quiz = (props) => {
 
-  // console.log(props);
-
   const {
     selectAnswer,
     setMessage,
@@ -16,44 +14,30 @@ const Quiz = (props) => {
     selectedAnswer,
     infoMessage,
   } = props
-
-  // console.log(selectAnswer);
-  // console.log(setMessage);
-  // console.log(setQuiz);
-
-  console.log(quiz);
-  // console.log(selectedAnswer);
-  // console.log(infoMessage);
   
   useEffect(() => {
     fetchQuiz()
   }, [])
 
-
   return (
     <div id="wrapper">
-      {
-        // quiz already in state? Let's use that, otherwise render "Loading next quiz..."
-        true ? (
+      {quiz ? (
           <>
-            <h2>What is a closure?</h2>
-
+            <h2>{quiz.question}</h2>
             <div id="quizAnswers">
               <div className="answer selected">
-                A function
+                {quiz.answers[0].text}
                 <button>
                   SELECTED
                 </button>
               </div>
-
               <div className="answer">
-                An elephant
+                {quiz.answers[1].text}
                 <button>
                   Select
                 </button>
               </div>
             </div>
-
             <button id="submitAnswerBtn">Submit answer</button>
           </>
         ) : 'Loading next quiz...'
@@ -64,9 +48,9 @@ const Quiz = (props) => {
 
 const mapStateToProps = state => {
   return {
-    quizStuff: state.quiz,
-    selectedAnswerStuff: state.selectedAnswer,
-    infoMessageStuff: state.infoMessage,
+    quiz: state.quiz,
+    selectedAnswer: state.selectedAnswer,
+    infoMessage: state.infoMessage,
   }
 }
 

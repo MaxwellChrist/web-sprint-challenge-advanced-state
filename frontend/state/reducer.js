@@ -63,9 +63,7 @@ function selectedAnswer(state = initialSelectedAnswerState, action) {
   }
 }
 
-const initialLoadingState = false
-// const initialMessageState = ''
-const initialMessageState = 'Loading next quiz...'
+const initialMessageState = ''
 function infoMessage(state = initialMessageState, action) {
   switch(action.type) {
     default:
