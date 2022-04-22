@@ -1,6 +1,7 @@
 import React from 'react'
 
 export default function Wheel(props) {
+  console.log("This is props", props)
   return (
     <div id="wrapper">
       <div id="wheel">
