@@ -1,6 +1,25 @@
-import React from 'react'
+import React from 'react';
+import { connect } from 'react-redux';
+import { selectAnswer, setMessage, setQuiz } from '../state/action-creators';
 
-export default function Quiz(props) {
+// export default function Quiz(props) {
+const Quiz = (props) => {
+
+  console.log(props);
+
+  const selectAnswer = props.selectAnswer;
+  const setMessage = props.setMessage;
+  const setQuiz = props.setQuiz
+
+  console.log(selectAnswer);
+  console.log(setMessage);
+  console.log(setQuiz);
+
+  // console.log(quizStuff);
+  // console.log(selectedAnswerStuff);
+  // console.log(infoMessageStuff);
+  
+
   return (
     <div id="wrapper">
       {
@@ -32,3 +51,13 @@ export default function Quiz(props) {
     </div>
   )
 }
+
+const mapStateToProps = state => {
+  return {
+    quizStuff: state.quiz,
+    selectedAnswerStuff: state.selectedAnswer,
+    infoMessageStuff: state.infoMessage,
+  }
+}
+
+export default connect(mapStateToProps, {selectAnswer, setMessage, setQuiz})(Quiz)

@@ -1,4 +1,14 @@
-import { MOVE_CLOCKWISE, MOVE_COUNTERCLOCKWISE } from "./action-types"
+import axios from 'axios';
+import { 
+  MOVE_CLOCKWISE, 
+  MOVE_COUNTERCLOCKWISE, 
+  SET_QUIZ_INTO_STATE, 
+  SET_SELECTED_ANSWER, 
+  SET_INFO_MESSAGE, 
+  INPUT_CHANGE, 
+  RESET_FORM 
+} from "./action-types"
+
 
 // ❗ You don't need to add extra action creators to achieve MVP
 export function moveClockwise() { 
@@ -9,15 +19,25 @@ export function moveCounterClockwise() {
   return { type: MOVE_COUNTERCLOCKWISE }
  }
 
-export function selectAnswer() { }
+export function selectAnswer() { 
+  return { type: SET_SELECTED_ANSWER }
+}
 
-export function setMessage() { }
+export function setMessage() { 
+  return { type: SET_INFO_MESSAGE }
+}
 
-export function setQuiz() { }
+export function setQuiz(data) { 
+  return { type: SET_QUIZ_INTO_STATE, payload: data }
+}
 
-export function inputChange() { }
+export function inputChange() { 
+  return { type: INPUT_CHANGE }
+}
 
-export function resetForm() { }
+export function resetForm() { 
+  return { type: RESET_FORM }
+}
 
 // ❗ Async action creators
 export function fetchQuiz() {
@@ -25,6 +45,7 @@ export function fetchQuiz() {
     // First, dispatch an action to reset the quiz state (so the "Loading next quiz..." message can display)
     // On successful GET:
     // - Dispatch an action to send the obtained quiz to its state
+    dispatch()
   }
 }
 export function postAnswer() {
