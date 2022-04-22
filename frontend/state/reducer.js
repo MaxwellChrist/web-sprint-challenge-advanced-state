@@ -4,20 +4,34 @@ import { MOVE_CLOCKWISE, MOVE_COUNTERCLOCKWISE } from './action-types'
 
 // const initialWheelState = 0;
 const initialWheelState = {
-  start: 0,
-  wheelArray: ["B","","","","",""],
+  position: 0,
 }
+const wheelState = null;
 function wheel(state = initialWheelState, action) {
   switch(action.type) {
     case MOVE_CLOCKWISE:
-      return {
-        ...state,
-        start: state.start + 1
+      if (state.position == 5) {
+        return {
+          ...state,
+          position: 0,
+        }
+      } else {
+        return {
+          ...state,
+          position: state.position + 1,
+        }
       }
     case MOVE_COUNTERCLOCKWISE:
-      return {
-        ...state,
-        start: state.start - 1
+      if (state.position == 0) {
+        return {
+          ...state,
+          position: 5,
+        }
+      } else {
+        return {
+          ...state,
+          position: state.position - 1,
+        }
       }
     default:
       return state
