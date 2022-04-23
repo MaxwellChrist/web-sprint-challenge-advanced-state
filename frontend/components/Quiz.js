@@ -1,8 +1,7 @@
-import React, { useEffect} from 'react';
+import React, { useState, useEffect} from 'react';
 import { connect } from 'react-redux';
-import { selectAnswer, setMessage, setQuiz, fetchQuiz, postAnswer } from '../state/action-creators';
+import { dispatch, selectAnswer, selectedAnswer, setMessage, setQuiz, fetchQuiz, postAnswer, postQuiz } from '../state/action-creators';
 
-// export default function Quiz(props) {
 const Quiz = (props) => {
 
   const {
@@ -13,11 +12,26 @@ const Quiz = (props) => {
     quiz,
     selectedAnswer,
     infoMessage,
+    postQuiz,
   } = props
   
   useEffect(() => {
     fetchQuiz()
   }, [])
+
+  const handleFirstAnswer = (answer) => {
+    console.log("first: ", answer);
+    selectAnswer(answer);
+  }
+
+  const handleSecondAnswer = (answer) => {
+    console.log("second: ", answer);
+    selectAnswer(answer);
+  }
+
+  // const handleSubmit = (quiz) => {
+  //   postQuiz({ quiz, selectAnswer })
+  // }
 
   return (
     <div id="wrapper">
@@ -27,18 +41,14 @@ const Quiz = (props) => {
             <div id="quizAnswers">
               <div className="answer selected">
                 {quiz.answers[0].text}
-                <button>
-                  SELECTED
-                </button>
+                <button onClick={() => handleFirstAnswer(quiz.answers[0].answer_id)}>SELECTED</button>
               </div>
               <div className="answer">
                 {quiz.answers[1].text}
-                <button>
-                  Select
-                </button>
+                <button onClick={() => handleSecondAnswer(quiz.answers[1].answer_id)}>SELECTED</button>
               </div>
             </div>
-            <button id="submitAnswerBtn">Submit answer</button>
+            <button onClick={() => handleSubmit(quiz.quiz_id)} id="submitAnswerBtn">Submit answer</button>
           </>
         ) : 'Loading next quiz...'
       }
@@ -54,4 +64,4 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps, {selectAnswer, setMessage, setQuiz, fetchQuiz, postAnswer})(Quiz)
+export default connect(mapStateToProps, {selectAnswer, setMessage, setQuiz, fetchQuiz, postAnswer, postQuiz })(Quiz)
