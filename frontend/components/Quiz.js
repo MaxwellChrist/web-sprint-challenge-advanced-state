@@ -33,6 +33,8 @@ const Quiz = (props) => {
   //   postQuiz({ quiz, selectAnswer })
   // }
 
+  console.log("this");
+
   return (
     <div id="wrapper">
       {quiz ? (
