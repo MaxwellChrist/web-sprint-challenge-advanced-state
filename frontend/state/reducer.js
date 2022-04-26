@@ -83,21 +83,10 @@ const initialFormState = {
 function form(state = initialFormState, action) {
   switch(action.type) {
     case INPUT_CHANGE:
-      if (action.payload.inputId == "newQuestion") {
-          
-      }
-      return {
+      return ({
         ...state,
-        [action.payload.newQuestion]: action.payload.value,
-        // [action.payload.inputId]: action.payload.value
-        // [action.payload.name]: action.payload.value -> what we're trying to get
-        // [newQuestion]: action.payload.value,
-        // [newTrueAnswer]: action.payload.value,
-        // [newFalseAnswer]: action.payload.value,
-        // newQuestion: action.payload.value,
-        // newTrueAnswer: action.payload.value,
-        // newFalseAnswer: action.payload.value,
-      }
+        [action.payload.inputId]: action.payload.value,
+      })
     default:
       return state
   }
