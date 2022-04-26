@@ -8,7 +8,7 @@ export function Message(props) {
   const setMessage = props.setMessage
   const infoMessage = props.infoMessage
 
-  return <div id="message">Nice job!</div>
+  return <div id="message">{infoMessage}</div>
 }
 
 const mapStateToProps = state => {

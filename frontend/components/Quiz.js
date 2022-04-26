@@ -5,19 +5,23 @@ import { dispatch, selectAnswer, selectedAnswer, setMessage, setQuiz, fetchQuiz,
 const Quiz = (props) => {
 
   const {
-    selectAnswer,
-    setMessage,
-    setQuiz,
-    fetchQuiz,
-    quiz,
-    selectedAnswer,
-    infoMessage,
+    dispatch, 
+    selectAnswer, 
+    selectedAnswer, 
+    setMessage, 
+    setQuiz, 
+    fetchQuiz, 
+    postAnswer, 
     postQuiz,
+    infoMessage,
+    quiz
   } = props
   
   useEffect(() => {
     fetchQuiz()
   }, [])
+
+
 
   const handleFirstAnswer = (answer) => {
     console.log("first: ", answer);
@@ -29,11 +33,11 @@ const Quiz = (props) => {
     selectAnswer(answer);
   }
 
-  // const handleSubmit = (quiz) => {
-  //   postQuiz({ quiz, selectAnswer })
-  // }
+  const handleSubmit = (quiz_id) => {
+    console.log("submitted");
+    postAnswer({quiz_id, answer_id: selectedAnswer})
+  }
 
-  console.log("this");
 
   return (
     <div id="wrapper">

@@ -4,9 +4,42 @@ import * as actionCreators from '../state/action-creators'
 
 export function Form(props) {
 
-  const onChange = evt => {
+  const {
+    setMessage,
+    infoMessage,
+    postQuiz,
+    inputChange,
+    form  
+  } = props
+
+  console.log(form)
+
+  const onChange = () => {
 
   }
+
+  // const onChange = evt => {
+  //   const { inputId, value } = evt.target
+  //   inputChange({ inputId, value })
+  // }
+
+  // const onChangeNewQuestion = evt => {
+  //   const { value } = evt.target;
+  //   const { inputId } = "newQuestion";
+  //   inputChange({ inputId, value })
+  // }
+
+  // const onChangeNewTrueAnswer = evt => {
+  //   const { value } = evt.target;
+  //   const { inputId } = "newTrueAnswer";
+  //   inputChange({ inputId, value })
+  // }
+
+  // const onChangeNewFalseAnswer = evt => {
+  //   const { value } = evt.target;
+  //   const { inputId } = "newFalseAnswer";
+  //   inputChange({ inputId, value })
+  // }
 
   const onSubmit = evt => {
 

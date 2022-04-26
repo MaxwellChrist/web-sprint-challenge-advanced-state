@@ -31,9 +31,13 @@ export function setQuiz(data) {
   return { type: SET_QUIZ_INTO_STATE, payload: data }
 }
 
-export function inputChange() { 
-  return { type: INPUT_CHANGE }
+export function inputChange({ inputId, value}) { 
+  return { type: INPUT_CHANGE, payload: {inputId, value} }
 }
+
+// export function inputChange({ newQuestion, newTrueAnswer, newFalseAnswer, value }) { 
+//   return { type: INPUT_CHANGE, payload: {newQuestion, newTrueAnswer, newFalseAnswer, value} }
+// }
 
 export function resetForm() { 
   return { type: RESET_FORM }
@@ -49,7 +53,7 @@ export function fetchQuiz() {
     dispatch(setQuiz(null))
     axios.get("http://localhost:9000/api/quiz/next") 
       .then((res) => {
-        console.log(res.data)
+        // console.log(res.data)
         dispatch(setQuiz(res.data))
       })
       .catch((err) => {
@@ -57,29 +61,32 @@ export function fetchQuiz() {
       })
   }
 }
-export function postAnswer() {
+export function postAnswer(item) {
   return function (dispatch) {
     // On successful POST:
     // - Dispatch an action to reset the selected answer state
     // - Dispatch an action to set the server message to state
     // - Dispatch the fetching of the next quiz
+
+    axios.post("http://localhost:9000/api/quiz/answer", item) 
+    .then((res) => {
+      console.log(res);
+      dispatch(selectAnswer(null))
+      dispatch(setMessage(res.data.message));
+      dispatch(fetchQuiz())
+
+    })
+    .catch((err) => {
+      debugger
+      console.log(err)
+    })
   }
 }
-export function postQuiz(answer) {
+export function postQuiz() {
   return function (dispatch) {
     // On successful POST:
     // - Dispatch the correct message to the the appropriate state
     // - Dispatch the resetting of the form
-    axios.post("http://localhost:9000/api/quiz/answer", {answer}) 
-      .then((res) => {
-        console.log(res);
-        dispatch(setQuiz(null))
-        dispatch(setMessage(res))
-      })
-      .catch((err) => {
-        debugger
-        console.log(err)
-      })
   }
 }
 // ❗ On promise rejections, use log statements or breakpoints, and put an appropriate error message in state
