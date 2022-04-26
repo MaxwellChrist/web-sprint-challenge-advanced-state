@@ -4,6 +4,8 @@ import { dispatch, selectAnswer, selectedAnswer, setMessage, setQuiz, fetchQuiz,
 
 const Quiz = (props) => {
 
+  const [stop, setStop] = useState(true)
+
   const {
     dispatch, 
     selectAnswer, 
@@ -18,26 +20,31 @@ const Quiz = (props) => {
   } = props
   
   useEffect(() => {
-    fetchQuiz()
+    fetchQuiz();
   }, [])
 
+  useEffect(() => {
+    handleStop()
+  }, [selectedAnswer])
 
-
-  const handleFirstAnswer = (answer) => {
-    console.log("first: ", answer);
-    selectAnswer(answer);
+  const handleStop = () => {
+    if(selectedAnswer) {
+      return setStop(false)
+    } else {
+      return stop
+    }
   }
 
-  const handleSecondAnswer = (answer) => {
-    console.log("second: ", answer);
+  const handleAnswer = (answer) => {
+    console.log("answer: ", answer);
     selectAnswer(answer);
   }
 
   const handleSubmit = (quiz_id) => {
     console.log("submitted");
     postAnswer({quiz_id, answer_id: selectedAnswer})
+    setStop(true)
   }
-
 
   return (
     <div id="wrapper">
@@ -45,16 +52,20 @@ const Quiz = (props) => {
           <>
             <h2>{quiz.question}</h2>
             <div id="quizAnswers">
-              <div className="answer selected">
+              <div className={`answer ${selectedAnswer === quiz.answers[0].answer_id ? "selected" : ""}`}>
                 {quiz.answers[0].text}
-                <button onClick={() => handleFirstAnswer(quiz.answers[0].answer_id)}>SELECTED</button>
+                <button onClick={() => handleAnswer(quiz.answers[0].answer_id)}>
+                  {`${selectedAnswer === quiz.answers[0].answer_id ? "SELECTED" : "Select"}`}
+                </button>
               </div>
-              <div className="answer">
+              <div className={`answer ${selectedAnswer === quiz.answers[1].answer_id ? "selected" : ""}`}>
                 {quiz.answers[1].text}
-                <button onClick={() => handleSecondAnswer(quiz.answers[1].answer_id)}>SELECTED</button>
+                <button onClick={() => handleAnswer(quiz.answers[1].answer_id)}>
+                  {`${selectedAnswer === quiz.answers[1].answer_id ? "SELECTED" : "Select"}`}
+                </button>
               </div>
             </div>
-            <button onClick={() => handleSubmit(quiz.quiz_id)} id="submitAnswerBtn">Submit answer</button>
+            <button onClick={() => handleSubmit(quiz.quiz_id)} id="submitAnswerBtn" disabled={`${stop ? "disabled" : ""}`}>Submit answer</button>
           </>
         ) : 'Loading next quiz...'
       }

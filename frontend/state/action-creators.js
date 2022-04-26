@@ -67,14 +67,12 @@ export function postAnswer(item) {
     // - Dispatch an action to reset the selected answer state
     // - Dispatch an action to set the server message to state
     // - Dispatch the fetching of the next quiz
-
     axios.post("http://localhost:9000/api/quiz/answer", item) 
     .then((res) => {
       console.log(res);
       dispatch(selectAnswer(null))
       dispatch(setMessage(res.data.message));
       dispatch(fetchQuiz())
-
     })
     .catch((err) => {
       debugger
