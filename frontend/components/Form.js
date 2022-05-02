@@ -5,19 +5,12 @@ import * as actionCreators from '../state/action-creators'
 export function Form(props) {
 
   const {
-    setMessage,
-    infoMessage,
     postQuiz,
     inputChange,
     form  
   } = props
 
-  console.log(form)
-
   const onChange = evt => {
-    // const newInputId = evt.target
-    // const newValue = evt.target.value
-    // inputChange({ newInputId, newValue })
     const { name, value } = evt.target
     inputChange({ name, value })
   }
@@ -33,7 +26,7 @@ export function Form(props) {
       <input maxLength={50} onChange={onChange} name="newQuestion"  value={form.newQuestion} id="newQuestion" placeholder="Enter question" />
       <input maxLength={50} onChange={onChange} name="newTrueAnswer" value={form.newTrueAnswer} id="newTrueAnswer" placeholder="Enter true answer" />
       <input maxLength={50} onChange={onChange} name="newFalseAnswer" value={form.newFalseAnswer} id="newFalseAnswer" placeholder="Enter false answer" />
-      <button disabled={`${form.newQuestion === "" || form.newTrueAnswer === "" || form.newFalseAnswer === "" ? "disabled" : ""}`} id="submitNewQuizBtn">Submit new quiz</button>
+      <button disabled={`${form.newQuestion.trim() === "" || form.newTrueAnswer.trim()  === "" || form.newFalseAnswer.trim()  === "" ? "disabled" : ""}`} id="submitNewQuizBtn">Submit new quiz</button>
     </form>
   )
 }

@@ -1,21 +1,16 @@
 import React, { useState, useEffect} from 'react';
 import { connect } from 'react-redux';
-import { dispatch, selectAnswer, selectedAnswer, setMessage, setQuiz, fetchQuiz, postAnswer, postQuiz } from '../state/action-creators';
+import { selectAnswer, fetchQuiz, postAnswer } from '../state/action-creators';
 
 const Quiz = (props) => {
 
   const [stop, setStop] = useState(true)
 
   const {
-    dispatch, 
     selectAnswer, 
     selectedAnswer, 
-    setMessage, 
-    setQuiz, 
     fetchQuiz, 
     postAnswer, 
-    postQuiz,
-    infoMessage,
     quiz
   } = props
   
@@ -36,12 +31,10 @@ const Quiz = (props) => {
   }
 
   const handleAnswer = (answer) => {
-    console.log("answer: ", answer);
     selectAnswer(answer);
   }
 
   const handleSubmit = (quiz_id) => {
-    console.log("submitted");
     postAnswer({quiz_id, answer_id: selectedAnswer})
     setStop(true)
   }
@@ -77,8 +70,7 @@ const mapStateToProps = state => {
   return {
     quiz: state.quiz,
     selectedAnswer: state.selectedAnswer,
-    infoMessage: state.infoMessage,
   }
 }
 
-export default connect(mapStateToProps, {selectAnswer, setMessage, setQuiz, fetchQuiz, postAnswer, postQuiz })(Quiz)
+export default connect(mapStateToProps, {selectAnswer, fetchQuiz, postAnswer })(Quiz)

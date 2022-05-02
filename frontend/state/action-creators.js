@@ -49,11 +49,11 @@ export function fetchQuiz() {
     dispatch(setQuiz(null))
     axios.get("http://localhost:9000/api/quiz/next") 
       .then((res) => {
-        // console.log(res.data)
         dispatch(setQuiz(res.data))
       })
       .catch((err) => {
         console.log(err)
+        debugger
       })
   }
 }
@@ -65,7 +65,6 @@ export function postAnswer(item) {
     // - Dispatch the fetching of the next quiz
     axios.post("http://localhost:9000/api/quiz/answer", item) 
     .then((res) => {
-      console.log(res);
       dispatch(selectAnswer(null))
       dispatch(setMessage(res.data.message));
       dispatch(fetchQuiz())
@@ -84,7 +83,6 @@ export function postQuiz(item) {
 
     axios.post('http://localhost:9000/api/quiz/new', item)
     .then((res => {
-      console.log(res);
       dispatch(setMessage(`Congrats: "${res.data.question}" is a great question!`))
       dispatch(resetForm())
     }))
