@@ -1,21 +1,24 @@
 import React, { useState, useEffect} from 'react';
 import { connect } from 'react-redux';
-import { selectAnswer, fetchQuiz, postAnswer } from '../state/action-creators';
+import { selectAnswer, fetchQuiz, postAnswer, setQuiz } from '../state/action-creators';
 
 const Quiz = (props) => {
 
-  const [stop, setStop] = useState(true)
+  const [stop, setStop] = useState(true);
 
   const {
     selectAnswer, 
     selectedAnswer, 
     fetchQuiz, 
     postAnswer, 
-    quiz
+    quiz,
+     setQuiz
   } = props
   
   useEffect(() => {
-    fetchQuiz();
+    if (!quiz) {
+      fetchQuiz();
+    }
   }, [])
 
   useEffect(() => {
@@ -29,6 +32,8 @@ const Quiz = (props) => {
       return stop
     }
   }
+
+  console.log(quiz)
 
   const handleAnswer = (answer) => {
     selectAnswer(answer);

@@ -53,9 +53,8 @@ export function fetchQuiz() {
       })
       .catch((err) => {
         console.log(err)
-        debugger
       })
-  }
+    }
 }
 export function postAnswer(item) {
   return function (dispatch) {
