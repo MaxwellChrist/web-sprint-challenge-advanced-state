@@ -2,16 +2,12 @@ import React from 'react'
 import { connect } from 'react-redux';
 import { moveClockwise, moveCounterClockwise } from '../state/action-creators';
 
-// export default function Wheel(props) {
-  const Wheel = (props) => {
-
-  //props deconstruction
+const Wheel = (props) => {
   const wheel = props.wheel;
   const moveClockwise = props.moveClockwise;
   const moveCounterClockwise = props.moveCounterClockwise;
   const position = props.wheel.position
 
-  // helper functions for button clicks
   const handleClockwise = () => {
     moveClockwise()
   }

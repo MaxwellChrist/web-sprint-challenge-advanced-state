@@ -33,8 +33,6 @@ const Quiz = (props) => {
     }
   }
 
-  console.log(quiz)
-
   const handleAnswer = (answer) => {
     selectAnswer(answer);
   }
